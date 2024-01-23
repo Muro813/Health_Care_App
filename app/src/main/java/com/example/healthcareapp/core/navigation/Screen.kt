@@ -1,5 +1,6 @@
 package com.example.healthcareapp.core.navigation
 
+import com.example.healthcareapp.core.navigation.Routes.LOGIN_SCREEN
 import com.example.healthcareapp.core.navigation.Routes.MEAL_SCREEN
 import com.example.healthcareapp.core.navigation.Routes.SPLASH_SCREEN
 import com.example.healthcareapp.core.navigation.destinations.MEAL_ID_ARGUMENT_KEY
@@ -13,4 +14,5 @@ sealed class Screen(val route: String) {
                 newValue = mealId.toString()
             )
     }
+    data object LoginScreen : Screen(LOGIN_SCREEN)
 }

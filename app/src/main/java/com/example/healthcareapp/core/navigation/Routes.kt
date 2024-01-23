@@ -7,4 +7,5 @@ object Routes {
     const val HOME = "home"
     const val SPLASH_SCREEN = "splash_screen"
     const val MEAL_SCREEN = "meal_screen/{$MEAL_ID_ARGUMENT_KEY}"
+    const val LOGIN_SCREEN = "login_screen"
 }

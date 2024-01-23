@@ -4,8 +4,8 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import javax.annotation.concurrent.Immutable
 
-val PrimaryColor = Color(0xFF21D4FD)
-val SecondaryColor = Color(0xFFB721FF)
+val PrimaryColor = Color(0xFF29FFC6)
+val SecondaryColor = Color(0xFF20E3B2)
 val DarkBlue = Color(0xFF163D5D)
 val DarkerGray = Color(0xFFF6F5F5)
 val Gray = Color(0xFFFAFAFA)
