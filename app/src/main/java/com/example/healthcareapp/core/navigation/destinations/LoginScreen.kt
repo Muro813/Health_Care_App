@@ -10,12 +10,11 @@ import com.example.healthcareapp.presentation.login.LoginViewModel
 
 fun NavGraphBuilder.loginScreenComposable(
     navController: NavController,
-    showSnackBar : (String) -> Unit
 ) {
     composable(
         route = Screen.LoginScreen.route
     ) {
         val viewModel = hiltViewModel<LoginViewModel>()
-        LoginScreen(viewModel = viewModel, showSnackBar = showSnackBar)
+        LoginScreen(viewModel = viewModel)
     }
 }

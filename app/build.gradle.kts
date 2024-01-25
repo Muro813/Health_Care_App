@@ -1,7 +1,3 @@
-import java.io.FileInputStream
-import java.io.IOException
-import java.util.Properties
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -49,7 +45,7 @@ android {
         create("apiDev") {
             dimension = "version"
             versionNameSuffix = "-dev"
-            buildConfigField("String", "BASE_URL", "\"https://www.google.com\"")
+            buildConfigField("String", "BASE_URL", "\"https://localhost:8080/\"")
         }
     }
     compileOptions {

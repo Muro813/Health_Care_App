@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Health Care App</string>
+    <string name="licna">Br. licne karte</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
 </resources>

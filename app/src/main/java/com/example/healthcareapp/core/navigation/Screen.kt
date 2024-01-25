@@ -1,5 +1,6 @@
 package com.example.healthcareapp.core.navigation
 
+import com.example.healthcareapp.core.navigation.Routes.HOME_SCREEN
 import com.example.healthcareapp.core.navigation.Routes.LOGIN_SCREEN
 import com.example.healthcareapp.core.navigation.Routes.MEAL_SCREEN
 import com.example.healthcareapp.core.navigation.Routes.SPLASH_SCREEN
@@ -15,4 +16,5 @@ sealed class Screen(val route: String) {
             )
     }
     data object LoginScreen : Screen(LOGIN_SCREEN)
+    data object HomeScreen : Screen(HOME_SCREEN)
 }

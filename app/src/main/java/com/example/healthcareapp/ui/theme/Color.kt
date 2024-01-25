@@ -14,6 +14,7 @@ val Yellow = Color(0xFFFFE073)
 val Red = Color(0xFFFF6666)
 val Orange = Color(0xFFFFAE73)
 val White = Color(0xFFFFFFFF)
+val Blue = Color(0xFF89CFF0)
 
 @Immutable
 data class HealthCareColors(
@@ -26,7 +27,8 @@ data class HealthCareColors(
     val yellow : Color,
     val red : Color,
     val orange : Color,
-    val white : Color
+    val white : Color,
+    val blue : Color
 )
 
 val LocalHealthCareColors = staticCompositionLocalOf {
@@ -40,7 +42,8 @@ val LocalHealthCareColors = staticCompositionLocalOf {
         yellow = Color.Unspecified,
         red = Color.Unspecified,
         orange = Color.Unspecified,
-        white = Color.Unspecified
+        white = Color.Unspecified,
+        blue = Color.Unspecified
     )
 }
 
@@ -54,5 +57,6 @@ val healthCareColors = HealthCareColors(
     yellow = Yellow,
     red = Red,
     orange = Orange,
-    white = White
+    white = White,
+    blue = Blue
 )

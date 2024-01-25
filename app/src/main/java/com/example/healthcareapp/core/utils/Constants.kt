@@ -9,4 +9,7 @@ object Constants {
     const val CHECK_CONNECTION = "Check your internet connection."
 
     const val ANIMATION_DURATION = 200
+
+    const val ERROR_MANDATORY = "This field is mandatory."
+    const val ERROR_PASSWORD = "Please enter a proper password."
 }
