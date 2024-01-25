@@ -12,6 +12,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Card
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,6 +24,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.healthcareapp.core.utils.noRippleClickable
+import com.example.healthcareapp.ui.theme.HealthCareTheme
 import io.github.boguszpawlowski.composecalendar.SelectableCalendar
 import io.github.boguszpawlowski.composecalendar.day.DayState
 import io.github.boguszpawlowski.composecalendar.header.MonthState
@@ -49,7 +54,7 @@ fun HomeScreen(
                 horizontalSwipeEnabled = true,
                 dayContent = { dayState ->
                     CustomDay(state = dayState) { date, isSelected ->
-                        onDateChanged(date.toString(), isSelected)
+//                        onDateChanged(date.toString(), isSelected)
                     }
                 },
                 monthHeader = { monthState -> CustomMonthHeader(monthState = monthState) },
@@ -77,10 +82,10 @@ fun <T : SelectionState> CustomDay(
     val isAvailableDay = when {
         isEndOfMonth -> {
             val today = LocalDate.now()
-            date >= today && date <= today.plusDays(2)
+            date >= today && date <= today.plusDays(62)
         }
 
-        else -> date >= LocalDate.now() && date <= LocalDate.now().plusDays(2)
+        else -> date >= LocalDate.now() && date <= LocalDate.now().plusDays(62)
     }
 
     Card(
@@ -89,7 +94,7 @@ fun <T : SelectionState> CustomDay(
             .padding(2.dp),
         elevation = 0.dp,
         shape = RectangleShape,
-        backgroundColor = if (isSelected) LusticaTheme.colors.darkBlue else LusticaTheme.colors.white
+        backgroundColor = if (isSelected) HealthCareTheme.colors.darkBlue else HealthCareTheme.colors.white
     ) {
         Box(
             modifier = Modifier.noRippleClickable {
@@ -106,13 +111,13 @@ fun <T : SelectionState> CustomDay(
             )
                 Text(
                     text = date.dayOfMonth.toString(),
-                    style = LusticaTheme.typography.gingerProRegular14,
-                    color = if (isSelected) LusticaTheme.colors.white else LusticaTheme.colors.darkBlue
+                    style = HealthCareTheme.typography.metropolisRegular14,
+                    color = if (isSelected) HealthCareTheme.colors.white else HealthCareTheme.colors.darkBlue
                 )
             else androidx.compose.material.Text(
                 text = date.dayOfMonth.toString(),
-                style = LusticaTheme.typography.gingerProRegular14,
-                color = LusticaTheme.colors.lightBlue
+                style = HealthCareTheme.typography.metropolisRegular14,
+                color = HealthCareTheme.colors.blue
             )
         }
     }
@@ -133,7 +138,7 @@ fun CustomMonthHeader(
         val canGoBack = monthState.currentMonth >= YearMonth.now()
             .plusMonths(1) || monthState.currentMonth > YearMonth.now().minusMonths(1)
         Image(
-            painter = painterResource(id = if (canGoBack) R.drawable.ic_enabled_back else R.drawable.ic_disabled_arrow_back),
+            if (canGoBack) Icons.Default.ArrowBack else Icons.Default.ArrowForward,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -145,7 +150,7 @@ fun CustomMonthHeader(
                 .align(Alignment.CenterStart)
         )
         Image(
-            painter = painterResource(id = if (canGoForward) R.drawable.ic_arrow_forward_enabled else R.drawable.ic_disabled_forward),
+            if (canGoForward) Icons.Default.ArrowForward else Icons.Default.ArrowForward,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -161,17 +166,17 @@ fun CustomMonthHeader(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ResponsiveText(
+            Text(
                 text = monthState.currentMonth.month
                     .getDisplayName(TextStyle.FULL, Locale.getDefault())
                     .uppercase(),
-                color = LusticaTheme.colors.darkBlue,
-                textStyle = LusticaTheme.typography.canelaRegular20
+                color = HealthCareTheme.colors.darkBlue,
+                style = HealthCareTheme.typography.metropolisRegular18
             )
-            ResponsiveText(
+            Text(
                 text = monthState.currentMonth.year.toString(),
-                color = LusticaTheme.colors.lightBlue,
-                textStyle = LusticaTheme.typography.gingerProRegular14
+                color = HealthCareTheme.colors.blue,
+                style = HealthCareTheme.typography.metropolisRegular14
             )
         }
     }
@@ -190,8 +195,8 @@ fun CustomWeekHeader(
                 modifier = Modifier
                     .weight(1f)
                     .wrapContentHeight(),
-                style = LusticaTheme.typography.gingerProLight14,
-                color = LusticaTheme.colors.darkBlue
+                style = HealthCareTheme.typography.metropolisRegular14,
+                color = HealthCareTheme.colors.darkBlue
             )
         }
     }
