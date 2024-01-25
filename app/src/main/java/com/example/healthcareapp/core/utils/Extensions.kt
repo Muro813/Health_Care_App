@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.Request
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.Calendar
 import java.util.Date
 import kotlin.math.PI
@@ -43,7 +44,12 @@ fun String?.toFullGenderNonNull() : String{
     if(this.contains("F")) return "Female"
     return "Other"
 }
-
+fun LocalDate?.toNonNull() : LocalDate {
+    return this ?: LocalDate.now()
+}
+fun <T> List<T>?.toNonNull() : List<T> {
+    return this ?: listOf()
+}
 fun Int?.toNonNull() = this ?: -1
 fun Boolean?.toBooleanNonNull() : Boolean{
     return this ?: false
