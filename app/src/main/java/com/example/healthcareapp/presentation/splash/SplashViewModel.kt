@@ -16,7 +16,7 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository,
     private val navigator: Navigator,
-    private val foodynessRepository: HealthCareRepository
+    private val healthCareRepository: HealthCareRepository
 ) : ViewModel() {
     fun onEvent(event : SplashEvent){
         when(event){
