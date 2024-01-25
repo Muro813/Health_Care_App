@@ -85,7 +85,7 @@ dependencies {
     val firebaseBomVersion = "32.6.0"
     val lottieVersion = "5.2.0"
     val desugaring_version = "1.2.2"
-
+    val calendarVersion = "1.0.2"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -138,4 +138,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:$firebaseBomVersion"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
+
+    //Calendar
+    implementation("io.github.boguszpawlowski.composecalendar:composecalendar:${calendarVersion}")
+    implementation("io.github.boguszpawlowski.composecalendar:kotlinx-datetime:${calendarVersion}")
 }
