@@ -7,18 +7,26 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.healthcareapp.core.components.DrawerContent
 import com.example.healthcareapp.core.navigation.Navigator
+import com.example.healthcareapp.core.navigation.Screen
 import com.example.healthcareapp.core.navigation.graphs.HealthCareNavigation
 import com.example.healthcareapp.core.utils.CustomModifiers
 import com.example.healthcareapp.core.utils.rememberAppState
+import com.example.healthcareapp.domain.model.DrawerNavItem
 import com.example.healthcareapp.ui.theme.HealthCareTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import com.example.healthcareapp.R
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -33,7 +41,7 @@ class MainActivity : ComponentActivity() {
                 val appState = rememberAppState()
 //                var bottomBarState by remember { (mutableStateOf(false)) }
                 val navBackStackEntry by appState.navController.currentBackStackEntryAsState()
-
+                var drawerState by remember { mutableStateOf(false)}
 //                bottomBarState = when (navBackStackEntry?.destination?.route) {
 //                    Screen.MealPlanScreen.route -> true
 //                    Screen.SavedRecipesScreen.route -> true
@@ -41,7 +49,10 @@ class MainActivity : ComponentActivity() {
 //                    Screen.HelpAndSupportScreen.route -> true
 //                    else -> false
 //                }
-
+                drawerState = when (navBackStackEntry?.destination?.route){
+                    Screen.HomeScreen.route -> true
+                    else -> false
+                }
                 CompositionLocalProvider(
                     LocalDensity provides Density(
                         LocalDensity.current.density,
@@ -49,50 +60,31 @@ class MainActivity : ComponentActivity() {
                     )
                 ) {
                     Scaffold(
-                        bottomBar = {
-//                            BottomNavigationBar(
-//                                items = listOf(
-//                                    BottomNavItem(
-//                                        name = stringResource(id = R.string.meal_plan),
-//                                        route = Screen.MealPlanScreen.route,
-//                                        icon = R.drawable.ic_meal_plan
-//                                    ),
-//                                    BottomNavItem(
-//                                        name = stringResource(id = R.string.saved_recipes),
-//                                        route = Screen.SavedRecipesScreen.route,
-//                                        icon = R.drawable.ic_bookmark
-//                                    ),
-//                                    BottomNavItem(
-//                                        name = stringResource(id = R.string.settings),
-//                                        route = Screen.SettingsScreen.route,
-//                                        icon = R.drawable.ic_settings
-//                                    ),
-//                                    BottomNavItem(
-//                                        name = stringResource(id = R.string.help_support),
-//                                        route = Screen.HelpAndSupportScreen.route,
-//                                        icon = R.drawable.ic_help_support
-//                                    )
-//                                ),
-//                                navController = appState.navController,
-//                                onItemClick = {
-//                                    appState.navController.navigate(it.route) {
-//                                        popUpTo(Screen.MealPlanScreen.route) {
-//                                            inclusive = it.route == Screen.MealPlanScreen.route
-//                                        }
-//                                    }
-//                                },
-//                                bottomBarState = bottomBarState,
-//                                modifier = Modifier
-//                                    .height(90.dp)
-//                                    .gradientBackground(
-//                                        colors = listOf(
-//                                            HealthCareTheme.colors.primaryColor,
-//                                            HealthCareTheme.colors.secondaryColor
-//                                        ),
-//                                        angle = -87f
-//                                    )
-//                            )
+                        drawerContent = {
+                                        DrawerContent(
+                                            items = listOf(
+                                                DrawerNavItem(
+                                                    name = "HOME",
+                                                    route = Screen.HomeScreen.route,
+                                                    R.drawable.ic_password_visible
+                                                )
+                                                //Recepti
+                                                //Nalazi
+                                            ),
+                                            drawerState = drawerState,
+                                            onItemClick = {
+                                                lifecycleScope.launch {
+                                                    appState.scaffoldState.drawerState.close()
+                                                }
+                                                appState.navController.navigate(it) {
+                                                    popUpTo(Screen.HomeScreen.route) {
+                                                        inclusive = it == Screen.HomeScreen.route
+                                                    }
+                                                }
+                                            }
+                                        )
                         },
+                        drawerGesturesEnabled = drawerState,
                         scaffoldState = appState.scaffoldState,
                         snackbarHost = CustomModifiers.snackBarHost
                     ) { innerPadding ->

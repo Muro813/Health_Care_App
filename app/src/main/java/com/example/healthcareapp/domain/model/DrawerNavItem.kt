@@ -1,6 +1,6 @@
 package com.example.healthcareapp.domain.model
 
-data class BottomNavItem(
+data class DrawerNavItem(
     val name: String,
     val route: String,
     val icon: Int

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -30,7 +31,8 @@ fun HomeScreenTopBar(
         modifier = Modifier
             .fillMaxWidth()
             .height(170.dp)
-            .background(HealthCareTheme.colors.primaryColor),
+            .background(HealthCareTheme.colors.secondaryColor)
+            .padding(horizontal = 32.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(20.dp)
     ) {

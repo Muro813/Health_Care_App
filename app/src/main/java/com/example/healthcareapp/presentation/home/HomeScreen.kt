@@ -69,7 +69,9 @@ fun HomeScreen(
         shouldShow = state.shouldShowDialog,
         appointments = state.appointments
     )
-    LazyColumn(){
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(20.dp)
+    ){
         item{
             HomeScreenTopBar(
                 name = state.doctor.name,
@@ -248,9 +250,12 @@ fun OptionsDialog(
     if(selectedDate != null && shouldShow){
         Dialog(onDismissRequest = { onDismiss() }) {
             Column(modifier = Modifier
-                .padding(horizontal = 32.dp)
                 .fillMaxWidth()
-                .background(HealthCareTheme.colors.white), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                .background(HealthCareTheme.colors.white, RoundedCornerShape(12.dp))
+                .padding(32.dp),
+                verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                Text(text = selectedDate.toString(), style = HealthCareTheme.typography.metropolisBold16)
+                Divider()
                 val availableOptions = options.find {
                     it.date == selectedDate
                 }
