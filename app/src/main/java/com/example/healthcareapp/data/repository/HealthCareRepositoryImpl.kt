@@ -6,8 +6,10 @@ import com.example.healthcareapp.data.remote.dto.ApiErrorDto
 import com.example.healthcareapp.data.remote.dto.AppointmentRequestDto
 import com.example.healthcareapp.data.remote.dto.AuthRequestDto
 import com.example.healthcareapp.data.remote.dto.AuthResponseDto
+import com.example.healthcareapp.data.remote.mapper.toDoctor
 import com.example.healthcareapp.data.remote.mapper.toEvent
 import com.example.healthcareapp.data.remote.services.ApiService
+import com.example.healthcareapp.domain.model.Doctor
 import com.example.healthcareapp.domain.model.Events
 import com.example.healthcareapp.domain.repository.HealthCareRepository
 import com.squareup.moshi.JsonAdapter
@@ -31,6 +33,18 @@ class HealthCareRepositoryImpl @Inject constructor(
 
     override suspend fun makeAppointment(date: LocalDate, option: String): Flow<Resource<Events>> = retrieveFlow {
         apiService.makeAppointment(AppointmentRequestDto(date = date, option = option))
+    }.mapResponse {
+        toEvent()
+    }
+
+    override suspend fun getDoctor(): Flow<Resource<Doctor>> = retrieveFlow{
+        apiService.getDoctor()
+    }.mapResponse{
+        toDoctor()
+    }
+
+    override suspend fun getAppointments(): Flow<Resource<Events>> = retrieveFlow {
+        apiService.getAppointments()
     }.mapResponse {
         toEvent()
     }

@@ -9,6 +9,7 @@ import com.example.healthcareapp.core.navigation.Navigator
 import com.example.healthcareapp.core.utils.collectLatestNoAuthCheck
 import com.example.healthcareapp.domain.model.Appointment
 import com.example.healthcareapp.domain.model.AppointmentOptions
+import com.example.healthcareapp.domain.model.Doctor
 import com.example.healthcareapp.domain.repository.HealthCareRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -27,6 +28,11 @@ class HomeViewModel @Inject constructor(
     private val _snackBarChannel = Channel<String>()
     val snackBarChannel = _snackBarChannel.receiveAsFlow()
 
+    init {
+//        getDoctor()
+//        getAppointments()
+    }
+
     fun onEvent(event: HomeEvent){
         when(event){
             is HomeEvent.OnDateClick -> {
@@ -34,7 +40,7 @@ class HomeViewModel @Inject constructor(
                 state = state.copy(selectedDate = event.date,shouldShowDialog = shouldShowDialog)
             }
             is HomeEvent.OnOptionClick -> {
-                selectOption(event.option)
+//                selectOption(event.option)
             }
 
             HomeEvent.OnDismiss -> {
@@ -62,6 +68,38 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+    private fun getDoctor() {
+        viewModelScope.launch {
+            healthCareRepository.getDoctor().collectLatestNoAuthCheck(
+                onSuccess = { res ->
+                    res.data?.let {
+                        state = state.copy(doctor = it)
+                    }
+                },
+                onError = {
+                    it.message?.let {  message ->
+                        _snackBarChannel.send(message)
+                    }
+                }
+            )
+        }
+    }
+    private fun getAppointments(){
+        viewModelScope.launch {
+            healthCareRepository.getAppointments().collectLatestNoAuthCheck(
+                onSuccess = { res ->
+                    res.data?.let{ data ->
+                        state = state.copy(options = data.options, appointments = data.appointments)
+                    }
+                },
+                onError = { res ->
+                    res.message?.let{ mess ->
+                        _snackBarChannel.send( mess)
+                    }
+                }
+            )
+        }
+    }
 }
 data class HomeState(
     val appointments : List<Appointment> = listOf(Appointment(0, LocalDate.now().plusDays(2), hour = "10:30")),
@@ -69,7 +107,13 @@ data class HomeState(
     val options : List<AppointmentOptions> = listOf(AppointmentOptions(LocalDate.now().plusDays(15),
         listOf("10:00 - 11:00","11:00-12:00")
     )),
-    val shouldShowDialog : Boolean = false
+    val shouldShowDialog : Boolean = false,
+    val doctor : Doctor = Doctor(
+        id = 0,
+        name = "Marko Markovic",
+        image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVR56mz9q3W7aAJEkTwIz_DBmMJ7zgQtWHyw&usqp=CAU",
+        speciality = "Kardiolog"
+    )
 )
 sealed class HomeEvent{
     data class OnDateClick(val date : LocalDate) : HomeEvent()

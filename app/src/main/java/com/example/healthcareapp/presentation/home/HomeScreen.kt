@@ -70,7 +70,13 @@ fun HomeScreen(
         appointments = state.appointments
     )
     LazyColumn(){
-//        HomeScreenTopBar()
+        item{
+            HomeScreenTopBar(
+                name = state.doctor.name,
+                image = state.doctor.image,
+                speciality = state.doctor.speciality
+            )
+        }
         item {
             SelectableCalendar(
                 modifier = Modifier
