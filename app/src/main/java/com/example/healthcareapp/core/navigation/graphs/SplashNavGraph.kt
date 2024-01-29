@@ -8,6 +8,8 @@ import com.example.healthcareapp.core.navigation.Screen
 import com.example.healthcareapp.core.navigation.destinations.homeScreenComposable
 import com.example.healthcareapp.core.navigation.destinations.loginScreenComposable
 import com.example.healthcareapp.core.navigation.destinations.mealScreenComposable
+import com.example.healthcareapp.core.navigation.destinations.recipesScreenComposable
+import com.example.healthcareapp.core.navigation.destinations.resultsScreenComposable
 import com.example.healthcareapp.core.navigation.destinations.splashScreenComposable
 
 fun NavGraphBuilder.splashNavGraph(
@@ -21,6 +23,8 @@ fun NavGraphBuilder.splashNavGraph(
         mealScreenComposable(navController = navController, showSnackBar = showSnackBar)
         loginScreenComposable(navController = navController)
         homeScreenComposable(navController = navController, showSnackBar = showSnackBar)
+        resultsScreenComposable(navController = navController,showSnackBar = showSnackBar)
+        recipesScreenComposable(navController = navController, showSnackBar = showSnackBar)
     }
 
 }

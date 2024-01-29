@@ -64,12 +64,20 @@ class MainActivity : ComponentActivity() {
                                         DrawerContent(
                                             items = listOf(
                                                 DrawerNavItem(
-                                                    name = "HOME",
+                                                    name = "Home",
                                                     route = Screen.HomeScreen.route,
                                                     R.drawable.ic_password_visible
+                                                ),
+                                                DrawerNavItem(
+                                                    name = "Receipti",
+                                                    route = Screen.RecipesScreen.route,
+                                                    R.drawable.ic_password_visible
+                                                ),
+                                                DrawerNavItem(
+                                                    name = "Nalazi",
+                                                    route = Screen.ResultsScreen.route,
+                                                    R.drawable.ic_password_visible
                                                 )
-                                                //Recepti
-                                                //Nalazi
                                             ),
                                             drawerState = drawerState,
                                             onItemClick = {
