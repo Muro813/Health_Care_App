@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -25,7 +26,7 @@ fun DrawerContent(
 ) {
 
     if(drawerState){
-        Column {
+        Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             items.forEach {
                 Row(
                     modifier = Modifier

@@ -52,10 +52,10 @@ class LoginViewModel @Inject constructor(
         val usernameError = if(state.username.isEmpty()) ERROR_MANDATORY else ""
         val passwordError = if(state.password.length < 8) ERROR_PASSWORD else ""
 
-        if(usernameError.isNotEmpty() || passwordError.isNotEmpty()){
-            state =state.copy(usernameError = usernameError, passwordError = passwordError)
-            return
-        }
+      //  if(usernameError.isNotEmpty() || passwordError.isNotEmpty()){
+        //    state =state.copy(usernameError = usernameError, passwordError = passwordError)
+          //  return
+       // }
 
         executeLogin()
     }

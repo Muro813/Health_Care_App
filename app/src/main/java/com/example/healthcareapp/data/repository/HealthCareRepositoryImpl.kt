@@ -8,9 +8,11 @@ import com.example.healthcareapp.data.remote.dto.AuthRequestDto
 import com.example.healthcareapp.data.remote.dto.AuthResponseDto
 import com.example.healthcareapp.data.remote.mapper.toDoctor
 import com.example.healthcareapp.data.remote.mapper.toEvent
+import com.example.healthcareapp.data.remote.mapper.toResults
 import com.example.healthcareapp.data.remote.services.ApiService
 import com.example.healthcareapp.domain.model.Doctor
 import com.example.healthcareapp.domain.model.Events
+import com.example.healthcareapp.domain.model.Result
 import com.example.healthcareapp.domain.repository.HealthCareRepository
 import com.squareup.moshi.JsonAdapter
 import kotlinx.coroutines.flow.Flow
@@ -47,5 +49,11 @@ class HealthCareRepositoryImpl @Inject constructor(
         apiService.getAppointments()
     }.mapResponse {
         toEvent()
+    }
+
+    override suspend fun getResults(): Flow<Resource<List<Result>>> = retrieveFlow {
+        apiService.getResults()
+    }.mapResponse {
+        toResults()
     }
 }

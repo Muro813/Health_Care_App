@@ -5,6 +5,7 @@ import com.example.healthcareapp.data.remote.dto.AppointmentResponseDto
 import com.example.healthcareapp.data.remote.dto.AuthRequestDto
 import com.example.healthcareapp.data.remote.dto.AuthResponseDto
 import com.example.healthcareapp.data.remote.dto.DoctorDto
+import com.example.healthcareapp.data.remote.dto.ResultDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -22,6 +23,9 @@ interface ApiService {
 
     @GET("/api/appointment")
     suspend fun getAppointments() : Response<AppointmentResponseDto>
+
+    @GET("/api/results")
+    suspend fun getResults() : Response<List<ResultDto>>
 //    @GET("/api/is-taken")
 //    suspend fun isEmailTaken(@Query("email") email : String) : Response<Any>
 //    @PUT("/api/user/profile-management/{id}")

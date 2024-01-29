@@ -9,6 +9,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
@@ -38,6 +39,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             HealthCareTheme {
+                val scope = rememberCoroutineScope()
                 val appState = rememberAppState()
 //                var bottomBarState by remember { (mutableStateOf(false)) }
                 val navBackStackEntry by appState.navController.currentBackStackEntryAsState()
@@ -51,6 +53,8 @@ class MainActivity : ComponentActivity() {
 //                }
                 drawerState = when (navBackStackEntry?.destination?.route){
                     Screen.HomeScreen.route -> true
+                    Screen.ResultsScreen.route -> true
+                    Screen.RecipesScreen.route -> true
                     else -> false
                 }
                 CompositionLocalProvider(
@@ -81,7 +85,7 @@ class MainActivity : ComponentActivity() {
                                             ),
                                             drawerState = drawerState,
                                             onItemClick = {
-                                                lifecycleScope.launch {
+                                                scope.launch {
                                                     appState.scaffoldState.drawerState.close()
                                                 }
                                                 appState.navController.navigate(it) {

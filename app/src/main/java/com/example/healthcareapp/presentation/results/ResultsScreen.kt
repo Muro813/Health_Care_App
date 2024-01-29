@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -34,13 +35,13 @@ fun ResultsScreen(
 
     Column(modifier = Modifier.fillMaxSize()){
         Row(modifier = Modifier
-            .fillMaxHeight()
+            .fillMaxWidth()
             .height(100.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Rezultati",
+                text = "Nalazi",
                 style = HealthCareTheme.typography.metropolisBold20,
                 color = HealthCareTheme.colors.darkBlue
             )
@@ -55,7 +56,8 @@ fun ResultsScreen(
             items(state.results){
                 ResultItem(
                     date = it.date,
-                    title = it.title
+                    title = it.title,
+                    lab = it.lab
                 ){
                     viewModel.onEvent(ResultsEvent.OnResultClick(it.id))
                 }
