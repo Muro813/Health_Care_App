@@ -1,5 +1,6 @@
 package com.example.healthcareapp.presentation.results
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -36,14 +37,15 @@ fun ResultsScreen(
     Column(modifier = Modifier.fillMaxSize()){
         Row(modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp),
+            .height(100.dp)
+            .background(HealthCareTheme.colors.primaryColor),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
                 text = "Nalazi",
                 style = HealthCareTheme.typography.metropolisBold20,
-                color = HealthCareTheme.colors.darkBlue
+                color = HealthCareTheme.colors.white
             )
         }
         Divider(color = HealthCareTheme.colors.secondaryColor)

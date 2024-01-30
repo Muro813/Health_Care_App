@@ -3,17 +3,26 @@ package com.example.healthcareapp.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.healthcareapp.core.components.DrawerContent
@@ -110,14 +119,32 @@ class MainActivity : ComponentActivity() {
                         scaffoldState = appState.scaffoldState,
                         snackbarHost = CustomModifiers.snackBarHost
                     ) { innerPadding ->
-                        HealthCareNavigation(
-                            navController = appState.navController,
-                            navigator = navigator,
-                            showSnackBar = { message ->
-                                appState.showSnackBar(message = message)
-                            },
-                            modifier = Modifier.padding(innerPadding)
-                        )
+                        Box{
+                            HealthCareNavigation(
+                                navController = appState.navController,
+                                navigator = navigator,
+                                showSnackBar = { message ->
+                                    appState.showSnackBar(message = message)
+                                },
+                                modifier = Modifier.padding(innerPadding)
+                            )
+                            if(drawerState){
+                                IconButton(
+                                    modifier = Modifier.align(Alignment.TopStart).size(32.dp),
+                                    onClick = {
+                                        scope.launch {
+                                            appState.scaffoldState.drawerState.open()
+                                        }
+                                    }) {
+                                    Icon(
+                                        Icons.Default.List,
+                                        contentDescription = null,
+                                        tint = HealthCareTheme.colors.white,
+                                        modifier = Modifier.size(32.dp)
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
