@@ -8,14 +8,17 @@ import com.example.healthcareapp.data.remote.dto.AuthRequestDto
 import com.example.healthcareapp.data.remote.dto.AuthResponseDto
 import com.example.healthcareapp.data.remote.mapper.toDoctor
 import com.example.healthcareapp.data.remote.mapper.toEvent
+import com.example.healthcareapp.data.remote.mapper.toResultInfo
 import com.example.healthcareapp.data.remote.mapper.toResults
 import com.example.healthcareapp.data.remote.services.ApiService
 import com.example.healthcareapp.domain.model.Doctor
 import com.example.healthcareapp.domain.model.Events
 import com.example.healthcareapp.domain.model.Result
+import com.example.healthcareapp.domain.model.ResultInfo
 import com.example.healthcareapp.domain.repository.HealthCareRepository
 import com.squareup.moshi.JsonAdapter
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -55,5 +58,11 @@ class HealthCareRepositoryImpl @Inject constructor(
         apiService.getResults()
     }.mapResponse {
         toResults()
+    }
+
+    override suspend fun getResultById(id: Int): Flow<Resource<ResultInfo>>  =  retrieveFlow{
+        apiService.getResultById(id = id)
+    }.mapResponse {
+        toResultInfo()
     }
 }

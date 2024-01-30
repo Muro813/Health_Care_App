@@ -6,10 +6,12 @@ import com.example.healthcareapp.data.remote.dto.AuthRequestDto
 import com.example.healthcareapp.data.remote.dto.AuthResponseDto
 import com.example.healthcareapp.data.remote.dto.DoctorDto
 import com.example.healthcareapp.data.remote.dto.ResultDto
+import com.example.healthcareapp.data.remote.dto.ResultInfoDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
     @POST("/api/login")
@@ -26,8 +28,6 @@ interface ApiService {
 
     @GET("/api/results")
     suspend fun getResults() : Response<List<ResultDto>>
-//    @GET("/api/is-taken")
-//    suspend fun isEmailTaken(@Query("email") email : String) : Response<Any>
-//    @PUT("/api/user/profile-management/{id}")
-//    suspend fun updateChoice(@Path("id") id : Int) : Response<Any>
+    @GET("/api/user/profile-management/{id}")
+    suspend fun getResultById(@Path("id") id : Int) : Response<ResultInfoDto>
 }

@@ -7,25 +7,27 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.healthcareapp.core.navigation.Screen
+import com.example.healthcareapp.presentation.result_info.ResultInfoScreen
+import com.example.healthcareapp.presentation.result_info.ResultInfoViewModel
 
-const val MEAL_ID_ARGUMENT_KEY = "meal_id"
+const val RESULT_ID_ARGUMENT_KEY = "meal_id"
 
-fun NavGraphBuilder.mealScreenComposable(
+fun NavGraphBuilder.resultInfoScreenComposable(
     navController: NavController,
     showSnackBar : (String) -> Unit
 ){
     composable(
-        route = Screen.MealScreen.route,
+        route = Screen.ResultInfoScreen.route,
         arguments = listOf(
-            navArgument(MEAL_ID_ARGUMENT_KEY) {
+            navArgument(RESULT_ID_ARGUMENT_KEY) {
                 type = NavType.IntType
                 defaultValue = -1
 
             }
         )
     ){ backStackEntry ->
-//        val mealId = backStackEntry.arguments?.getInt(MEAL_ID_ARGUMENT_KEY) ?: -1
-//        val viewModel = hiltViewModel<MealViewModel>()
-//        MealScreen(viewModel = viewModel, mealId = mealId, showSnackBar = showSnackBar)
+        val resultId = backStackEntry.arguments?.getInt(RESULT_ID_ARGUMENT_KEY) ?: -1
+        val viewModel = hiltViewModel<ResultInfoViewModel>()
+        ResultInfoScreen(viewModel = viewModel, resultId = resultId, showSnackBar = showSnackBar)
     }
 }

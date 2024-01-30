@@ -62,9 +62,9 @@ class ResultsViewModel @Inject constructor(
 
     private fun navigateToResultInfoScreen(id : Int) {
         viewModelScope.launch {
-//            navigator.navigateTo(Screen.ResultInfoScreen.passId(
-//                id = id
-//            ))
+            navigator.navigateTo(Screen.ResultInfoScreen.passResultId(
+                resultId = id
+            ))
         }
     }
 }

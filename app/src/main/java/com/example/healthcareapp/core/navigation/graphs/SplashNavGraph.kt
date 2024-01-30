@@ -7,8 +7,8 @@ import com.example.healthcareapp.core.navigation.Routes.HOME
 import com.example.healthcareapp.core.navigation.Screen
 import com.example.healthcareapp.core.navigation.destinations.homeScreenComposable
 import com.example.healthcareapp.core.navigation.destinations.loginScreenComposable
-import com.example.healthcareapp.core.navigation.destinations.mealScreenComposable
 import com.example.healthcareapp.core.navigation.destinations.recipesScreenComposable
+import com.example.healthcareapp.core.navigation.destinations.resultInfoScreenComposable
 import com.example.healthcareapp.core.navigation.destinations.resultsScreenComposable
 import com.example.healthcareapp.core.navigation.destinations.splashScreenComposable
 
@@ -20,7 +20,7 @@ fun NavGraphBuilder.splashNavGraph(
         route = HOME, startDestination = Screen.SplashScreen.route
     ) {
         splashScreenComposable(navController = navController)
-        mealScreenComposable(navController = navController, showSnackBar = showSnackBar)
+        resultInfoScreenComposable(navController = navController, showSnackBar = showSnackBar)
         loginScreenComposable(navController = navController)
         homeScreenComposable(navController = navController, showSnackBar = showSnackBar)
         resultsScreenComposable(navController = navController,showSnackBar = showSnackBar)
