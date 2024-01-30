@@ -70,17 +70,17 @@ class MainActivity : ComponentActivity() {
                                                 DrawerNavItem(
                                                     name = "Home",
                                                     route = Screen.HomeScreen.route,
-                                                    R.drawable.ic_password_visible
+                                                    R.drawable.ic_home
                                                 ),
                                                 DrawerNavItem(
                                                     name = "Receipti",
                                                     route = Screen.RecipesScreen.route,
-                                                    R.drawable.ic_password_visible
+                                                    R.drawable.ic_recipes
                                                 ),
                                                 DrawerNavItem(
                                                     name = "Nalazi",
                                                     route = Screen.ResultsScreen.route,
-                                                    R.drawable.ic_password_visible
+                                                    R.drawable.ic_results
                                                 )
                                             ),
                                             drawerState = drawerState,
@@ -91,6 +91,16 @@ class MainActivity : ComponentActivity() {
                                                 appState.navController.navigate(it) {
                                                     popUpTo(Screen.HomeScreen.route) {
                                                         inclusive = it == Screen.HomeScreen.route
+                                                    }
+                                                }
+                                            },
+                                            onLogOutClick = {
+                                                scope.launch {
+                                                    appState.scaffoldState.drawerState.close()
+                                                }
+                                                appState.navController.navigate(Screen.LoginScreen.route){
+                                                    popUpTo(Screen.LoginScreen.route){
+                                                        inclusive = true
                                                     }
                                                 }
                                             }
