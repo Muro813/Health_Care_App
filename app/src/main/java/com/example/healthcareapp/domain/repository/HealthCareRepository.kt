@@ -4,6 +4,7 @@ import com.example.healthcareapp.core.utils.Resource
 import com.example.healthcareapp.data.remote.dto.AuthResponseDto
 import com.example.healthcareapp.domain.model.Doctor
 import com.example.healthcareapp.domain.model.Events
+import com.example.healthcareapp.domain.model.Recipe
 import com.example.healthcareapp.domain.model.Result
 import com.example.healthcareapp.domain.model.ResultInfo
 import kotlinx.coroutines.flow.Flow
@@ -16,4 +17,5 @@ interface HealthCareRepository {
     suspend fun getAppointments() : Flow<Resource<Events>>
     suspend fun getResults() : Flow<Resource<List<Result>>>
     suspend fun getResultById(id : Int) : Flow<Resource<ResultInfo>>
+    suspend fun getRecipes() : Flow<Resource<List<Recipe>>>
 }

@@ -8,11 +8,13 @@ import com.example.healthcareapp.data.remote.dto.AuthRequestDto
 import com.example.healthcareapp.data.remote.dto.AuthResponseDto
 import com.example.healthcareapp.data.remote.mapper.toDoctor
 import com.example.healthcareapp.data.remote.mapper.toEvent
+import com.example.healthcareapp.data.remote.mapper.toRecipe
 import com.example.healthcareapp.data.remote.mapper.toResultInfo
 import com.example.healthcareapp.data.remote.mapper.toResults
 import com.example.healthcareapp.data.remote.services.ApiService
 import com.example.healthcareapp.domain.model.Doctor
 import com.example.healthcareapp.domain.model.Events
+import com.example.healthcareapp.domain.model.Recipe
 import com.example.healthcareapp.domain.model.Result
 import com.example.healthcareapp.domain.model.ResultInfo
 import com.example.healthcareapp.domain.repository.HealthCareRepository
@@ -64,5 +66,11 @@ class HealthCareRepositoryImpl @Inject constructor(
         apiService.getResultById(id = id)
     }.mapResponse {
         toResultInfo()
+    }
+
+    override suspend fun getRecipes(): Flow<Resource<List<Recipe>>> = retrieveFlow{
+        apiService.getRecipes()
+    }.mapResponse {
+        toRecipe()
     }
 }
