@@ -22,7 +22,9 @@ fun List<AppointmentDto>?.toAppointments() : List<Appointment>{
             Appointment(
                 id = it.id.toNonNull(),
                 date = it.date.toNonNull(),
-                hour = it.hours.toNonNull()
+                hour = it.hours.toNonNull(),
+                doctor = it.doctor.toNonNull(),
+                patient = it.patient.toNonNull()
             )
         )
     }

@@ -10,9 +10,11 @@ import com.example.healthcareapp.core.utils.collectLatestNoAuthCheck
 import com.example.healthcareapp.domain.model.Appointment
 import com.example.healthcareapp.domain.model.AppointmentOptions
 import com.example.healthcareapp.domain.model.Doctor
+import com.example.healthcareapp.domain.repository.DataStoreRepository
 import com.example.healthcareapp.domain.repository.HealthCareRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -22,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val navigator: Navigator,
-    private val healthCareRepository: HealthCareRepository
+    private val healthCareRepository: HealthCareRepository,
+    private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
     var state by mutableStateOf(HomeState())
     private val _snackBarChannel = Channel<String>()
@@ -31,6 +34,7 @@ class HomeViewModel @Inject constructor(
     init {
 //        getDoctor()
 //        getAppointments()
+        getUser()
     }
 
     fun onEvent(event: HomeEvent){
@@ -68,6 +72,13 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
+    private fun getUser(){
+        viewModelScope.launch {
+            val user = dataStoreRepository.getUser().first()
+            state = state.copy(userName = user.name,role = user.role)
+        }
+    }
     private fun getDoctor() {
         viewModelScope.launch {
             healthCareRepository.getDoctor().collectLatestNoAuthCheck(
@@ -102,7 +113,7 @@ class HomeViewModel @Inject constructor(
     }
 }
 data class HomeState(
-    val appointments : List<Appointment> = listOf(Appointment(0, LocalDate.now().plusDays(2), hour = "10:30")),
+    val appointments : List<Appointment> = listOf(Appointment(0, LocalDate.now().plusDays(2), hour = "10:30",doctor = "Marko Doktorovic", patient = "Jovan Pacijent")),
     val selectedDate : LocalDate ?= null,
     val options : List<AppointmentOptions> = listOf(AppointmentOptions(LocalDate.now().plusDays(15),
         listOf("10:00 - 11:00","11:00-12:00")
@@ -113,7 +124,9 @@ data class HomeState(
         name = "Marko Markovic",
         image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVR56mz9q3W7aAJEkTwIz_DBmMJ7zgQtWHyw&usqp=CAU",
         speciality = "Kardiolog"
-    )
+    ),
+    val userName : String = String(),
+    val role : Int = -1
 )
 sealed class HomeEvent{
     data class OnDateClick(val date : LocalDate) : HomeEvent()

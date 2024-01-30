@@ -35,6 +35,7 @@ fun DrawerContent(
             items.forEach {
                 Row(
                     modifier = Modifier
+                        .padding(vertical = 20.dp)
                     .noRippleClickable { onItemClick(it.route) },
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -63,7 +64,7 @@ fun DrawerContent(
                         modifier = Modifier.size(24.dp)
                     )
                     Text(
-                        text = "Logout",
+                        text = "Odjava",
                         style = HealthCareTheme.typography.metropolisBold20,
                     )
                 }

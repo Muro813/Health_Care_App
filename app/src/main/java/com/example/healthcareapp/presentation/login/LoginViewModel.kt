@@ -12,6 +12,7 @@ import com.example.healthcareapp.core.utils.Constants.ERROR_MANDATORY
 import com.example.healthcareapp.core.utils.Constants.ERROR_PASSWORD
 import com.example.healthcareapp.core.utils.collectLatestNoAuthCheck
 import com.example.healthcareapp.core.utils.collectLatestWithLoadingNoAuthCheck
+import com.example.healthcareapp.domain.model.User
 import com.example.healthcareapp.domain.repository.DataStoreRepository
 import com.example.healthcareapp.domain.repository.HealthCareRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -62,17 +63,27 @@ class LoginViewModel @Inject constructor(
 
     private fun executeLogin() {
         viewModelScope.launch {
+            dataStoreRepository.saveUser(User(name = "Doktor Doktorevic", role = 0))
             navigator.popUpTo(Screen.HomeScreen.route,ROOT,true)
 //            healthCareRepository.login(
 //                username = state.username,
 //                password = state.password
-//            ).collectLatestWithLoadingNoAuthCheck(
-//                onSuccess = {
+//           ).collectLatestWithLoadingNoAuthCheck(
+//               onSuccess = {
 //                    it.data?.let {  response ->
+//                        response.user?.let { user ->
+//                            if(user.name != null && user.role != null){
+//                                dataStoreRepository.saveUser(user = User(
+//                                    name = user.name,
+//                                    role = user.role
+//                                )
+//                                )
+//                            }
+//                        }
 //                        response.token?.let {
 //                            dataStoreRepository.saveToken(response.token)
 //                            state = state.copy(shouldShowLoader = false)
-//                            navigator.popUpTo(Screen.HomeScreen.route,ROOT,true)
+//                          navigator.popUpTo(Screen.HomeScreen.route,ROOT,true)
 //                        }
 //                    }
 //                },

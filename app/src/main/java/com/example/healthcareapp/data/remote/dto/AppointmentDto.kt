@@ -8,5 +8,7 @@ import java.time.LocalDate
 data class AppointmentDto(
     @Json(name = "id") val id : Int ?= null,
     @Json(name = "date") val date : LocalDate ?= null,
-    @Json(name = "hours") val hours : String ?= null
+    @Json(name = "hours") val hours : String ?= null,
+    @Json(name = "doctor") val doctor : String ?= null,
+    @Json(name = "patient") val patient : String ?= null
 )

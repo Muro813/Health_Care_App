@@ -24,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
@@ -76,9 +77,9 @@ fun HomeScreen(
             .fillMaxSize()
     ){
             HomeScreenTopBar(
-                name = state.doctor.name,
-                image = state.doctor.image,
-                speciality = state.doctor.speciality
+                name = state.userName,
+                image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVR56mz9q3W7aAJEkTwIz_DBmMJ7zgQtWHyw&usqp=CAU",
+                speciality = if(state.role == 0) state.doctor.speciality else ""
             )
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -88,7 +89,7 @@ fun HomeScreen(
                         .padding(top = 30.dp)
                         .padding(horizontal = 32.dp)
                 ) {
-                    Text(text = "Zakazivanje:", style = HealthCareTheme.typography.metropolisBold20, color = HealthCareTheme.colors.darkBlue.copy(alpha = 0.6f ))
+                    Text(text = if(state.role == 0) "Pregled zakazanih:" else "Zakazivanje:", style = HealthCareTheme.typography.metropolisBold20, color = HealthCareTheme.colors.darkBlue.copy(alpha = 0.6f ))
                 }
                 SelectableCalendar(
                     modifier = Modifier
@@ -116,14 +117,19 @@ fun HomeScreen(
                     monthHeader = { monthState -> CustomMonthHeader(monthState = monthState) },
                     weekHeader = { dayOfWeeks -> CustomWeekHeader(daysOfWeek = dayOfWeeks) }
                 )
-                Row(
+                Column(
                     modifier = Modifier
                         .padding(top = 30.dp)
                         .padding(horizontal = 32.dp)
+                        .clip(RoundedCornerShape(12.dp)),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     Text(text = "Zakazano:", style = HealthCareTheme.typography.metropolisBold20, color = HealthCareTheme.colors.darkBlue.copy(alpha = 0.6f ))
+                    Divider()
                     state.appointments.forEach {
-
+                        val name = if(state.role == 0) it.patient else it.doctor
+                        Text(text = "${it.date} - ${it.hour} - $name")
+                        Divider()
                     }
                 }
             }

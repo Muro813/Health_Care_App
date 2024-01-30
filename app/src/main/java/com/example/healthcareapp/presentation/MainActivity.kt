@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
                                         DrawerContent(
                                             items = listOf(
                                                 DrawerNavItem(
-                                                    name = "Home",
+                                                    name = "Pocetna",
                                                     route = Screen.HomeScreen.route,
                                                     R.drawable.ic_home
                                                 ),
