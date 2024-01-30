@@ -67,16 +67,16 @@ data class RecipesState(
     val recipes : MutableList<Recipe> = mutableListOf(
         Recipe(
             medicines = mutableListOf(
-                Medicine("Medicine1", "5 dana, 8:00", "500mg, 2 puta dnevno"),
-                Medicine("Medicine2", "10 dana, 9:00", "250mg, 3 puta dnevno"),
-                Medicine("Medicine3", "7 dana, 10:00", "100mg, 1 put dnevno"),
-                Medicine("Medicine4", "14 dana, 11:00", "200mg, 2 puta dnevno"),
-                Medicine("Medicine5", "3 dana, 12:00", "150mg, 3 puta dnevno"),
-                Medicine("Medicine6", "6 dana, 13:00", "300mg, 1 put dnevno"),
-                Medicine("Medicine7", "8 dana, 14:00", "350mg, 2 puta dnevno"),
-                Medicine("Medicine8", "9 dana, 15:00", "400mg, 3 puta dnevno"),
-                Medicine("Medicine9", "12 dana, 16:00", "450mg, 1 put dnevno"),
-                Medicine("Medicine10", "15 dana, 17:00", "600mg, 2 puta dnevno")
+                Medicine("Medicine1", "5 dana", "500mg, 2 puta dnevno"),
+                Medicine("Medicine2", "10 dana", "250mg, 3 puta dnevno"),
+                Medicine("Medicine3", "7 dana", "100mg, 1 put dnevno"),
+                Medicine("Medicine4", "14 dana", "200mg, 2 puta dnevno"),
+                Medicine("Medicine5", "3 dana", "150mg, 3 puta dnevno"),
+                Medicine("Medicine6", "6 dana", "300mg, 1 put dnevno"),
+                Medicine("Medicine7", "8 dana", "350mg, 2 puta dnevno"),
+                Medicine("Medicine8", "9 dana", "400mg, 3 puta dnevno"),
+                Medicine("Medicine9", "12 dana", "450mg, 1 put dnevno"),
+                Medicine("Medicine10", "15 dana", "600mg, 2 puta dnevno")
             ),
             patient = "Marko pacijent"
         )

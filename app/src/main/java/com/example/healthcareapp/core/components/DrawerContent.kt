@@ -35,6 +35,7 @@ fun DrawerContent(
             items.forEach {
                 Row(
                     modifier = Modifier
+                        .fillMaxWidth()
                         .padding(vertical = 20.dp)
                     .noRippleClickable { onItemClick(it.route) },
                     horizontalArrangement = Arrangement.spacedBy(10.dp),

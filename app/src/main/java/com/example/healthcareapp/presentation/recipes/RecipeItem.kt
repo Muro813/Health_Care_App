@@ -35,6 +35,9 @@ fun RecipeItem(
         if(role == 0){
             Text(text = "$patientName:", style = HealthCareTheme.typography.metropolisBold18, color = HealthCareTheme.colors.darkBlue)
         }
+        else {
+            Text(text = "Trenutna terapija:", style = HealthCareTheme.typography.metropolisBold18, color = HealthCareTheme.colors.darkBlue)
+        }
         medicine.forEachIndexed { index, it ->
                 Row(modifier = Modifier
                     .fillMaxWidth()

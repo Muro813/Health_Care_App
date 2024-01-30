@@ -82,7 +82,7 @@ class MainActivity : ComponentActivity() {
                                                     R.drawable.ic_home
                                                 ),
                                                 DrawerNavItem(
-                                                    name = "Receipti",
+                                                    name = "Recepti",
                                                     route = Screen.RecipesScreen.route,
                                                     R.drawable.ic_recipes
                                                 ),
@@ -130,7 +130,7 @@ class MainActivity : ComponentActivity() {
                             )
                             if(drawerState){
                                 IconButton(
-                                    modifier = Modifier.align(Alignment.TopStart).size(32.dp),
+                                    modifier = Modifier.align(Alignment.TopStart).padding(top = 10.dp, start = 10.dp),
                                     onClick = {
                                         scope.launch {
                                             appState.scaffoldState.drawerState.open()
@@ -140,7 +140,7 @@ class MainActivity : ComponentActivity() {
                                         Icons.Default.List,
                                         contentDescription = null,
                                         tint = HealthCareTheme.colors.white,
-                                        modifier = Modifier.size(32.dp)
+                                        modifier = Modifier.size(48.dp)
                                     )
                                 }
                             }
