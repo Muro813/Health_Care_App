@@ -80,14 +80,20 @@ fun HomeScreen(
                 image = state.doctor.image,
                 speciality = state.doctor.speciality
             )
-
             Column(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center
             ){
+                Row(
+                    modifier = Modifier
+                        .padding(top = 30.dp)
+                        .padding(horizontal = 32.dp)
+                ) {
+                    Text(text = "Zakazivanje:", style = HealthCareTheme.typography.metropolisBold20, color = HealthCareTheme.colors.darkBlue.copy(alpha = 0.6f ))
+                }
                 SelectableCalendar(
                     modifier = Modifier
                         .padding(horizontal = 32.dp)
+                        .padding(top = 30.dp)
                         .border(
                             1.dp,
                             HealthCareTheme.colors.primaryColor,
@@ -110,6 +116,16 @@ fun HomeScreen(
                     monthHeader = { monthState -> CustomMonthHeader(monthState = monthState) },
                     weekHeader = { dayOfWeeks -> CustomWeekHeader(daysOfWeek = dayOfWeeks) }
                 )
+                Row(
+                    modifier = Modifier
+                        .padding(top = 30.dp)
+                        .padding(horizontal = 32.dp)
+                ) {
+                    Text(text = "Zakazano:", style = HealthCareTheme.typography.metropolisBold20, color = HealthCareTheme.colors.darkBlue.copy(alpha = 0.6f ))
+                    state.appointments.forEach {
+
+                    }
+                }
             }
 
     }
